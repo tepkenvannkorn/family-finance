@@ -1,0 +1,37 @@
+# Dependencies
+/vendor/
+
+# Environment / secrets — never commit real credentials
+.env
+.env.testing
+.env.*.local
+
+# Runtime storage — user-uploaded receipts, logs, and cached settings
+# shouldn't be versioned (and uploads may contain private family data)
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+
+# Backups exported from the app (contain full financial data)
+*.sql
+*.sql.gz
+
+# PHPUnit
+/.phpunit.cache/
+/.phpunit.result.cache
+
+# Composer
+composer.phar
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS cruft
+.DS_Store
+Thumbs.db

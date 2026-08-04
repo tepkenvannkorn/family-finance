@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roles & Permissions — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html" class="active">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Administrator Guide / Roles & Permissions</p>
+    <h1>Roles & Permissions</h1>
+
+<p>VK Finance ships with two roles:</p>
+<table>
+<tr><th>Role</th><th>Can do</th></tr>
+<tr><td>Administrator</td><td>Everything — manage users, settings, categories, exchange rates; view every family member's transactions and reports; view audit logs</td></tr>
+<tr><td>Member</td><td>Add/edit/delete their own transactions (if allowed in Settings); view their own dashboard and reports</td></tr>
+</table>
+<p>Permissions are assigned by role, not hardcoded per page — this keeps the system ready to support more roles in
+the future without a code change, even though only Administrator and Member are available today.</p>
+
+</main>
+</body>
+</html>

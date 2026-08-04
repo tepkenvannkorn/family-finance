@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exchange Rates — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html" class="active">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Administrator Guide / Exchange Rates</p>
+    <h1>Exchange Rates</h1>
+
+<p>Go to <strong>Settings → Manage exchange rates</strong>.</p>
+<h2>Setting a rate manually</h2>
+<p>Enter a USD → KHR rate and click <strong>Set manually</strong>. This is recorded with a timestamp — past reports
+always use the rate that was current at the time, so changing today's rate never rewrites yesterday's numbers.</p>
+<h2>Fetching automatically</h2>
+<p>Click <strong>Fetch latest rate now</strong> to pull the current rate from an external exchange-rate service.
+A fetched rate that differs wildly (more than 15%) from the last known rate is rejected automatically, to protect
+against a bad or tampered response — you'll need to set it manually if that large a change is genuinely correct.</p>
+<h2>Scheduled sync</h2>
+<p>Under <strong>Settings → Currency</strong>, turn on automatic sync and choose an interval (every login, daily, or
+weekly). See <a href="../developer/deployment.html">Deployment</a> for wiring the daily/weekly option to a cron job.</p>
+
+</main>
+</body>
+</html>

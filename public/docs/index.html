@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VK Finance Documentation</title>
+<link rel="stylesheet" href="assets/css/docs.css">
+<script src="assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="index.html" class="active">Home</a>
+    <h2>User Guide</h2>
+    <a href="user-guide/login.html">Logging In</a>
+    <a href="user-guide/dashboard.html">Dashboard</a>
+    <a href="user-guide/transactions.html">Transactions</a>
+    <a href="user-guide/reports.html">Reports</a>
+    <a href="user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="admin-guide/installation.html">Installation</a>
+    <a href="admin-guide/users.html">Managing Users</a>
+    <a href="admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="developer/architecture.html">Architecture</a>
+    <a href="developer/database.html">Database Schema</a>
+    <a href="developer/coding-standards.html">Coding Standards</a>
+    <a href="developer/api.html">Internal API Reference</a>
+    <a href="developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="faq.html">FAQ</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <h1>VK Finance</h1>
+    <p>A private, self-hosted web application for tracking your family's daily income and expenses in both
+    Cambodian Riel (KHR) and US Dollar (USD), with a shared dashboard, reports, and per-family-member accounts.</p>
+
+    <div class="callout">
+        New here? Start with <a href="user-guide/login.html">Logging In</a>, then
+        <a href="user-guide/dashboard.html">Understanding the Dashboard</a>.
+        Setting up a fresh install? Go to <a href="admin-guide/installation.html">Installation</a>.
+    </div>
+
+    <h2>What this app does</h2>
+    <ul>
+        <li>Record income and expense transactions in KHR or USD, with categories, notes, and optional receipt/invoice attachments.</li>
+        <li>See a live dashboard: total income, total expense, balance, and charts for trends and category breakdowns.</li>
+        <li>Generate and export reports (daily/weekly/monthly/yearly/custom) as CSV, Excel, or PDF.</li>
+        <li>Manage family member accounts and roles (Administrator / Member) with an audit trail of important actions.</li>
+    </ul>
+
+    <h2>Who this documentation is for</h2>
+    <table>
+        <tr><th>Section</th><th>Audience</th></tr>
+        <tr><td>User Guide</td><td>Any family member using the app day-to-day</td></tr>
+        <tr><td>Administrator Guide</td><td>Whoever set up the app / manages accounts and settings</td></tr>
+        <tr><td>Developer Docs</td><td>Anyone modifying or extending the codebase</td></tr>
+    </table>
+
+    <p style="margin-top:3rem;color:var(--muted);font-size:0.85rem;">
+        VK Finance — private family application. Not for public or commercial use.
+    </p>
+</main>
+</body>
+</html>

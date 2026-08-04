@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database Schema — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html" class="active">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Developer Docs / Database Schema</p>
+    <h1>Database Schema</h1>
+
+<p>See <code>/database/migrations</code> for the authoritative, versioned schema (one file per table). Summary ERD:</p>
+<div class="mermaid">
+erDiagram
+    ROLES ||--o{ USERS : "has many"
+    ROLES ||--o{ ROLE_PERMISSIONS : "has many"
+    PERMISSIONS ||--o{ ROLE_PERMISSIONS : "has many"
+    USERS ||--o{ TRANSACTIONS : "creates"
+    USERS ||--o{ DASHBOARD_PREFERENCES : "personalizes"
+    USERS ||--o{ AUDIT_LOGS : "performs"
+    CATEGORIES ||--o{ TRANSACTIONS : "classifies"
+    TRANSACTIONS ||--o{ ATTACHMENTS : "has"
+</div>
+<h2>Notable design choices</h2>
+<ul>
+    <li><strong>exchange_rates is append-only</strong> — every change is a new timestamped row, so historical reports use the rate that was current at the time.</li>
+    <li><strong>transactions.deleted_at</strong> — soft delete; recoverable by an admin (schema-level; no restore UI yet).</li>
+    <li><strong>settings is a grouped key/value store</strong>, typed via a <code>type</code> column, so new settings never require a migration.</li>
+    <li><strong>totp_secret and recurring_rule</strong> columns exist but are unused today — provisioned ahead of the 2FA / recurring-transactions features listed as future work.</li>
+</ul>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });</script>
+
+</main>
+</body>
+</html>

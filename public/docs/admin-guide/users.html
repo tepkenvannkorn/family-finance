@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Managing Users — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html" class="active">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Administrator Guide / Managing Users</p>
+    <h1>Managing Users</h1>
+
+<h2>Creating a user</h2>
+<p>Go to <strong>Users → + Add user</strong>, fill in name/email/role/password, and save. There's no public sign-up —
+you create every account.</p>
+<h2>Editing, deactivating, deleting</h2>
+<ul>
+    <li><strong>Edit</strong> changes name, email, role, or resets the password (leave the password field blank to keep it unchanged).</li>
+    <li><strong>Deactivate</strong> blocks sign-in without deleting any of that person's transaction history — the recommended way to "remove" someone.</li>
+    <li><strong>Delete</strong> permanently removes the account. Blocked if that person still has recorded transactions — deactivate instead in that case.</li>
+</ul>
+<h2>Locked accounts</h2>
+<p>Repeated failed logins temporarily lock an account. You'll see a <strong>Locked</strong> badge in the Users list — click <strong>Unlock</strong> to restore access immediately.</p>
+<div class="callout">You cannot deactivate, delete, or demote the last remaining administrator account — this is a built-in safeguard against locking everyone out.</div>
+
+</main>
+</body>
+</html>

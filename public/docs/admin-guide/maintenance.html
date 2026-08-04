@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backup & Maintenance — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html" class="active">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Administrator Guide / Backup & Maintenance</p>
+    <h1>Backup & Maintenance</h1>
+
+<p>Go to <strong>Settings → Backup & maintenance</strong>.</p>
+<h2>Backups</h2>
+<ul>
+    <li><strong>Download full database backup (.sql)</strong> — a complete <code>mysqldump</code> of everything. Requires the <code>mysqldump</code> binary on the server.</li>
+    <li><strong>Download all transactions (.csv)</strong> — just the transaction data, useful for spreadsheets.</li>
+</ul>
+<h2>Restoring a backup</h2>
+<p>Restoring isn't done through the web interface (for safety). On the server: <code>mysql -u USER -p family_finance &lt; backup.sql</code>.</p>
+<h2>Maintenance mode</h2>
+<p>Turning this on shows every non-administrator a simple "under maintenance" page, while administrators can still
+sign in normally — useful while you're making changes.</p>
+<h2>Audit logs</h2>
+<p>See <a href="#" onclick="return false;">Audit Logs</a> in the main navigation for a searchable history of every
+significant action: logins, transaction changes, user management, settings changes, and more.</p>
+
+</main>
+</body>
+</html>

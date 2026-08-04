@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coding Standards — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html" class="active">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Developer Docs / Coding Standards</p>
+    <h1>Coding Standards</h1>
+
+<ul>
+    <li>PSR-12 formatting; <code>declare(strict_types=1)</code> in every file.</li>
+    <li>PDO prepared statements everywhere — never string-concatenated SQL.</li>
+    <li>Controllers stay thin: validation lives in <code>Requests/</code>, authorization in <code>Policies/</code>, business logic in <code>Services/</code>, complex queries in <code>Repositories/</code>.</li>
+    <li>All output goes through <code>View::e()</code> unless deliberately raw (and that's a visible, commented choice).</li>
+    <li>Money is <code>DECIMAL</code> in the database and string-typed in PHP end to end — <code>bcmath</code> for any arithmetic, never floats.</li>
+    <li>New settings are added to the relevant seeder + the <code>SettingsController::SCHEMA</code> array — never hardcoded into a controller.</li>
+</ul>
+
+</main>
+</body>
+</html>

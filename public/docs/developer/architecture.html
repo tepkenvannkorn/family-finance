@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html" class="active">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Developer Docs / Architecture</p>
+    <h1>Architecture</h1>
+
+<p>Modular MVC. Each module under <code>app/Modules/&lt;Name&gt;</code> is self-contained: Controllers, Views,
+its own <code>routes.php</code>, and (where needed) Requests, Services, Repositories, and Policies. The front
+controller (<code>public/index.php</code>) auto-loads every module's <code>routes.php</code> via <code>glob()</code> —
+adding or removing a module is adding or removing that one file.</p>
+
+<pre><code>Request → public/index.php
+        → Session::start() + remember-me cookie resume
+        → maintenance-mode gate
+        → Router::dispatch()
+            → middleware pipeline (Auth, Csrf, Permission, FeatureFlag)
+            → Controller
+                → Request (validation) / Policy (authorization)
+                → Model or Repository (data)
+                → Service (business logic, e.g. CurrencyConverter)
+            → View::render() (auto-escaped output)
+</code></pre>
+
+<div class="mermaid">
+flowchart LR
+    A[Router] --> B[Middleware pipeline]
+    B --> C[Controller]
+    C --> D[Request/Policy]
+    C --> E[Model / Repository]
+    C --> F[Service]
+    C --> G[View]
+</div>
+
+<h2>Why no full framework</h2>
+<p>This is a private, single-household application. A hand-rolled router/DI-free core keeps the entire request
+lifecycle auditable in a few small files — appropriate for the security-sensitive, low-traffic nature of the app —
+rather than pulling in a large framework's surface area.</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });</script>
+
+</main>
+</body>
+</html>

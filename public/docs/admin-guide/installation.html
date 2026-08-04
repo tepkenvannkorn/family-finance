@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installation — VK Finance Docs</title>
+<link rel="stylesheet" href="../assets/css/docs.css">
+<script src="../assets/js/docs.js" defer></script>
+</head>
+<body>
+<nav class="sidebar">
+    <div class="brand">VK Finance Docs</div>
+    <input type="text" id="doc-search" placeholder="Search pages…">
+    <a href="../index.html">Home</a>
+    <h2>User Guide</h2>
+    <a href="../user-guide/login.html">Logging In</a>
+    <a href="../user-guide/dashboard.html">Dashboard</a>
+    <a href="../user-guide/transactions.html">Transactions</a>
+    <a href="../user-guide/reports.html">Reports</a>
+    <a href="../user-guide/settings.html">My Profile & Preferences</a>
+    <h2>Administrator Guide</h2>
+    <a href="../admin-guide/installation.html" class="active">Installation</a>
+    <a href="../admin-guide/users.html">Managing Users</a>
+    <a href="../admin-guide/permissions.html">Roles & Permissions</a>
+    <a href="../admin-guide/exchange-rates.html">Exchange Rates</a>
+    <a href="../admin-guide/maintenance.html">Backup & Maintenance</a>
+    <h2>Developer Docs</h2>
+    <a href="../developer/architecture.html">Architecture</a>
+    <a href="../developer/database.html">Database Schema</a>
+    <a href="../developer/coding-standards.html">Coding Standards</a>
+    <a href="../developer/api.html">Internal API Reference</a>
+    <a href="../developer/deployment.html">Deployment</a>
+    <h2>More</h2>
+    <a href="../faq.html">FAQ</a>
+    <a href="../changelog.html">Changelog</a>
+    <a href="../release-notes.html">Release Notes</a>
+</nav>
+<main>
+    <button id="theme-toggle" class="theme-toggle">🌓 Toggle theme</button>
+    <p class="breadcrumb"><a href="../index.html">Home</a> / Administrator Guide / Installation</p>
+    <h1>Installation</h1>
+
+<h2>Server requirements</h2>
+<ul>
+    <li>PHP 8.3+ with <code>pdo_mysql</code>, <code>bcmath</code>, <code>fileinfo</code>, <code>mbstring</code> extensions</li>
+    <li>Apache 2 with <code>mod_rewrite</code> enabled</li>
+    <li>MySQL 8+</li>
+    <li>Composer</li>
+</ul>
+<h2>Steps</h2>
+<ol>
+    <li>Copy the application files to your server.</li>
+    <li>Run <code>composer install</code> in the project root.</li>
+    <li>Copy <code>config/.env.example</code> to <code>.env</code> and fill in your database credentials and a default admin email/password.</li>
+    <li>Point your Apache <code>DocumentRoot</code> at the project's <code>public/</code> folder (see <a href="../developer/deployment.html">Deployment</a> for a full vhost example).</li>
+    <li>Run <code>php database/migrate.php</code> to create all tables.</li>
+    <li>Run <code>php database/seed.php</code> to load default roles, categories, settings, and your admin account.</li>
+    <li>Visit the site and log in with the admin email/password from your <code>.env</code>.</li>
+</ol>
+<div class="callout">Change your admin password immediately after first login, from <strong>Profile</strong>.</div>
+
+</main>
+</body>
+</html>
