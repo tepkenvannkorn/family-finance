@@ -48,7 +48,7 @@ final class TransactionRepository
 
         $stmt = $db->prepare($sql);
         foreach ($params as $key => $value) {
-            $stmt->bindValue($key, $value);
+            $stmt->bindValue(':' . $key, $value);
         }
         $stmt->bindValue('limit', $perPage, PDO::PARAM_INT);
         $stmt->bindValue('offset', $offset, PDO::PARAM_INT);
@@ -107,9 +107,20 @@ final class TransactionRepository
             $conditions[] = 't.created_by = :user_id';
             $params['user_id'] = $filters['user_id'];
         }
+        // if (!empty($filters['keyword'])) {
+        //     $conditions[] = '(t.description LIKE :keyword OR t.notes LIKE :keyword)';
+        //     $params['keyword'] = '%' . $filters['keyword'] . '%';
+        // }
         if (!empty($filters['keyword'])) {
-            $conditions[] = '(t.description LIKE :keyword OR t.notes LIKE :keyword)';
-            $params['keyword'] = '%' . $filters['keyword'] . '%';
+            $conditions[] = '(
+                t.description LIKE :keyword_description
+                OR t.notes LIKE :keyword_notes
+            )';
+
+            $keyword = '%' . $filters['keyword'] . '%';
+
+            $params['keyword_description'] = $keyword;
+            $params['keyword_notes'] = $keyword;
         }
         if (!empty($filters['amount_min'])) {
             $conditions[] = 't.amount >= :amount_min';
