@@ -20,29 +20,60 @@ use App\Core\View;
         }
     </script>
 </head>
-<body class="min-h-screen bg-slate-50">
-    <nav class="bg-white border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-            <div class="flex items-center gap-6">
-                <a href="/dashboard" class="font-semibold text-slate-800">VK Finance</a>
-                <a href="/dashboard" class="text-sm text-slate-500 hover:text-slate-800">Dashboard</a>
-                <a href="/transactions" class="text-sm text-slate-500 hover:text-slate-800">Transactions</a>
-                <a href="/reports" class="text-sm text-slate-500 hover:text-slate-800">Reports</a>
-                <?php if (Session::get('role_name') === 'admin'): ?>
-                    <a href="/users" class="text-sm text-slate-500 hover:text-slate-800">Users</a>
-                    <a href="/settings" class="text-sm text-slate-500 hover:text-slate-800">Settings</a>
-                <?php endif; ?>
-                <a href="/profile" class="text-sm text-slate-500 hover:text-slate-800">Profile</a>
-            </div>
-            <form method="POST" action="/logout">
-                <?= \App\Core\Csrf::field() ?>
-                <button type="submit" class="text-sm text-slate-500 hover:text-slate-800">Log out</button>
-            </form>
-        </div>
-    </nav>
+<body
+    class="bg-slate-50"
+    x-data="{
+        sidebarOpen:false
+    }">
 
-    <main class="max-w-6xl mx-auto px-4 py-8">
-        <?= $content ?>
-    </main>
+    <!-- Dark overlay -->
+
+    <div
+        x-show="sidebarOpen"
+        x-transition.opacity
+        @click="sidebarOpen=false"
+        class="fixed inset-0 bg-black/40 z-40 lg:hidden">
+
+    </div>
+
+    <!-- Mobile sidebar -->
+
+    <div
+
+        class="fixed inset-y-0 left-0 z-50
+               w-64
+               transform transition-transform
+               lg:hidden"
+
+        :class="sidebarOpen
+            ? 'translate-x-0'
+            : '-translate-x-full'">
+
+        <?php include __DIR__.'/../partials/sidebar.php'; ?>
+
+    </div>
+
+    <!-- Desktop sidebar -->
+
+    <div class="hidden lg:block">
+
+        <?php include __DIR__.'/../partials/sidebar.php'; ?>
+
+    </div>
+
+    <!-- Content -->
+
+    <div class="lg:ml-64 min-h-screen">
+
+        <?php include __DIR__.'/../partials/topbar.php'; ?>
+
+        <main class="p-6">
+
+            <?= $content ?>
+
+        </main>
+
+    </div>
+
 </body>
 </html>
