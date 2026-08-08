@@ -15,7 +15,7 @@ use App\Core\Session;
 
         <!-- Mobile hamburger -->
         <button
-            @click="sidebarOpen = !sidebarOpen"
+            @click="$store.app.sidebarOpen = !$store.app.sidebarOpen"
             class="lg:hidden rounded-lg p-2 hover:bg-slate-100">
 
             <svg

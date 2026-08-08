@@ -18,20 +18,27 @@ use App\Core\View;
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => navigator.serviceWorker.register('/service-worker.js'));
         }
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('app', {
+                sidebarOpen: false,
+                sidebarMini: false,
+                currency: '<?= View::e($currencyDisplay ?? 'original') ?>',
+                pageTitle: '',
+                editMode: false,
+                notifications: 0,
+                online: navigator.onLine
+            });
+        });
     </script>
 </head>
-<body
-    class="bg-slate-50"
-    x-data="{
-        sidebarOpen:false
-    }">
+<body class="bg-slate-50" x-data>
 
     <!-- Dark overlay -->
 
     <div
-        x-show="sidebarOpen"
+        x-show="$store.app.sidebarOpen"
         x-transition.opacity
-        @click="sidebarOpen=false"
+        @click="$store.app.sidebarOpen=false"
         class="fixed inset-0 bg-black/40 z-40 lg:hidden">
 
     </div>
@@ -45,7 +52,7 @@ use App\Core\View;
                transform transition-transform
                lg:hidden"
 
-        :class="sidebarOpen
+        :class="$store.app.sidebarOpen
             ? 'translate-x-0'
             : '-translate-x-full'">
 
