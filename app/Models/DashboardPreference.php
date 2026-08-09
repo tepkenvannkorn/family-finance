@@ -41,7 +41,7 @@ final class DashboardPreference
     private static function defaultLayout(): array
     {
         $default = SettingsCache::get('dashboard', 'default_layout', null);
-        return $default ?? ['widgets' => ['balance', 'income_vs_expense', 'recent_transactions', 'monthly_trend']];
+        return $default ?? ['widgets' => ['balance', 'income_vs_expense', 'recent_transactions', 'monthly_trend', 'weekly_trend', 'expense_categories', 'currency_breakdown']];
     }
 
     // private static function defaultLayout(): array

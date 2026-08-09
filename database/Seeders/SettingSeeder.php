@@ -54,7 +54,7 @@ final class SettingSeeder extends Seeder
         ['group' => 'dashboard', 'key' => 'show_yearly_summary', 'value' => '1', 'type' => 'bool'],
         ['group' => 'dashboard', 'key' => 'show_balance_cards', 'value' => '1', 'type' => 'bool'],
         ['group' => 'dashboard', 'key' => 'show_quick_statistics', 'value' => '1', 'type' => 'bool'],
-        ['group' => 'dashboard', 'key' => 'default_layout', 'value' => '{"widgets":["balance","income_vs_expense","recent_transactions","monthly_trend"]}', 'type' => 'json'],
+        ['group' => 'dashboard', 'key' => 'default_layout', 'value' => '{"widgets":["balance","income_vs_expense","monthly_trend","weekly_trend","expense_categories","currency_breakdown","recent_transactions"]}', 'type' => 'json'],
 
         // 11.5 User / security-adjacent
         ['group' => 'user', 'key' => 'session_timeout_minutes', 'value' => '120', 'type' => 'int'],
