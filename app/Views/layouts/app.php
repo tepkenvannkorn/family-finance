@@ -37,6 +37,7 @@ use App\Core\View;
     <!-- Dark overlay -->
 
     <div
+        x-cloak
         x-show="$store.app.sidebarOpen"
         x-transition.opacity
         @click="$store.app.sidebarOpen=false"
@@ -47,7 +48,7 @@ use App\Core\View;
     <!-- Mobile sidebar -->
 
     <div
-
+        x-cloak
         class="fixed inset-y-0 left-0 z-50
                w-64
                transform transition-transform
