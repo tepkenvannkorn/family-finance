@@ -3,7 +3,7 @@
 // support offline transaction entry (see Phase 1 architecture notes — full
 // offline write + background sync is out of scope for this pass).
 
-const CACHE_NAME = 'sabay-finance-shell-v7';
+const CACHE_NAME = 'sabay-finance-shell-v8';
 
 const SHELL_ASSETS = [
     '/offline.html',

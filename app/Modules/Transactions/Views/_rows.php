@@ -14,8 +14,8 @@ $totalPages = max(1, (int) ceil($total / $perPage));
 $symbols = ['USD' => '$', 'KHR' => '៛'];
 ?>
 <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="min-w-max w-full text-sm">
+    <div class="w-full overflow-x-auto touch-pan-x">
+        <table class="min-w-[1000px] w-full text-sm">
             <thead class="bg-slate-50 text-slate-500 text-left">
                 <tr>
                     <th class="px-4 py-3 font-medium">Date</th>
