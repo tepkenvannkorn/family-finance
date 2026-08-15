@@ -67,6 +67,22 @@ final class ReportExporter
     }
 
     /** Requires composer package dompdf/dompdf (see composer.json). */
+    // public function streamPdf(string $html, string $filename): never
+    // {
+    //     if (!class_exists(\Dompdf\Dompdf::class)) {
+    //         http_response_code(500);
+    //         echo 'PDF export requires `composer install` to pull in dompdf/dompdf.';
+    //         exit;
+    //     }
+
+    //     $dompdf = new \Dompdf\Dompdf();
+    //     $dompdf->loadHtml($html);
+    //     $dompdf->setPaper('A4', 'portrait');
+    //     $dompdf->render();
+    //     $dompdf->stream("{$filename}.pdf", ['Attachment' => true]);
+    //     exit;
+    // }
+
     public function streamPdf(string $html, string $filename): never
     {
         if (!class_exists(\Dompdf\Dompdf::class)) {
@@ -75,11 +91,27 @@ final class ReportExporter
             exit;
         }
 
-        $dompdf = new \Dompdf\Dompdf();
-        $dompdf->loadHtml($html);
+        $publicPath = dirname(__DIR__, 4) . '/public';
+        $fontPath = $publicPath . '/assets/fonts';
+
+        $options = new \Dompdf\Options();
+
+        $options->setChroot($publicPath);
+
+        $options->setFontDir($fontPath);
+        $options->setFontCache($fontPath);
+
+        $dompdf = new \Dompdf\Dompdf($options);
+
+        $dompdf->loadHtml($html, 'UTF-8');
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream("{$filename}.pdf", ['Attachment' => true]);
+
+        $dompdf->stream(
+            "{$filename}.pdf",
+            ['Attachment' => true]
+        );
+
         exit;
     }
 }

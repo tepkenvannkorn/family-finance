@@ -3,6 +3,7 @@
 /** @var string $dateFrom */
 /** @var string $dateTo */
 use App\Core\View;
+$fontPath = dirname(__DIR__, 4) . '/public/assets/fonts';
 $symbols = ['USD' => '$', 'KHR' => '៛'];
 ?>
 <!DOCTYPE html>
@@ -10,7 +11,25 @@ $symbols = ['USD' => '$', 'KHR' => '៛'];
 <head>
 <meta charset="UTF-8">
 <style>
-    body { font-family: DejaVu Sans, sans-serif; font-size: 12px; color: #1e293b; }
+    @font-face {
+        font-family: 'Noto Sans Khmer';
+        font-style: normal;
+        font-weight: normal;
+        src: url('<?= $fontPath ?>/NotoSansKhmer-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Noto Sans Khmer';
+        font-style: normal;
+        font-weight: bold;
+        src: url('<?= $fontPath ?>/NotoSansKhmer-Bold.ttf') format('truetype');
+    }
+
+    body {
+        font-family: 'Noto Sans Khmer', sans-serif;
+        font-size: 12px;
+        color: #1e293b;
+    }
     h1 { font-size: 16px; margin-bottom: 4px; }
     p.range { color: #64748b; margin-top: 0; }
     table { width: 100%; border-collapse: collapse; }
