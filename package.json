@@ -1,0 +1,27 @@
+{
+  "name": "familyapp",
+  "version": "1.0.0",
+  "description": "A private, self-hosted family income & expense manager — PHP 8.3+, Apache, MySQL 8+, Tailwind CSS, Alpine.js, Chart.js.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tepkenvannkorn/family-finance.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tepkenvannkorn/family-finance/issues"
+  },
+  "homepage": "https://github.com/tepkenvannkorn/family-finance#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

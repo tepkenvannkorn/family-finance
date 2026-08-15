@@ -5,8 +5,8 @@
 /** @var string $name */
 use App\Core\View;
 ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script src="/assets/js/chart.umd.min.js"></script>
+<script src="/assets/js/sortable.min.js"></script>
 
 <!-- <div x-data="dashboard()" x-init="init()"> -->
 <div x-data="dashboard()">
@@ -145,23 +145,11 @@ function dashboard() {
         sortable: null,
 
         enableDragSort() {
-            // console.log("enableDragSort");
             if (this.sortable) return;
 
             const grid = document.getElementById('widget-grid');
             if (!grid || !window.Sortable) return;
 
-            // this.sortable = Sortable.create(grid, {
-            //     handle: '.drag-handle',
-            //     animation: 150,
-
-            //     onEnd: (evt) => {
-            //         const moved = this.layout.widgets.splice(evt.oldIndex, 1)[0];
-            //         this.layout.widgets.splice(evt.newIndex, 0, moved);
-
-            //         this.saveLayout();
-            //     }
-            // });
             this.sortable = Sortable.create(grid, {
                 handle: '.drag-handle',
                 animation: 0,
@@ -179,21 +167,6 @@ function dashboard() {
             }
         },
 
-        // enableDragSort() {
-        //     const grid = document.getElementById('widget-grid');
-        //     if (!grid || !window.Sortable) return;
-            
-        //     Sortable.create(grid, {
-        //         handle: '.drag-handle',
-        //         animation: 150,
-        //         onEnd: () => {
-        //             const order = [...grid.children].map(el => el.dataset.id);
-        //             this.layout.widgets.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
-        //             this.saveLayout();
-        //         }
-        //     });
-        // },
-
         saveLayout() {
             fetch('/dashboard/layout', {
                 method: 'POST',
@@ -201,28 +174,86 @@ function dashboard() {
                 body: JSON.stringify(this.layout)
             });
         },
-        loadData() {
-            // console.count("loadData");
-            // console.trace("loadData");
 
-            fetch('/dashboard/data?currency=' + this.currency)
-                .then(r => r.json())
-                .then(data => {
-                    // console.log(data);
-                    
+        async loadData() {
+            const storageKey = 'dashboard-data-' + this.currency;
+
+            try {
+                const response = await fetch(
+                    '/dashboard/data?currency=' + encodeURIComponent(this.currency),
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        cache: 'no-store'
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`Dashboard request failed: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Save the latest successful dashboard snapshot.
+                try {
+                    await VKStorage.set(storageKey, {
+                        data: data,
+                        savedAt: new Date().toISOString()
+                    });
+                } catch (storageError) {
+                    console.warn(
+                        'Unable to save dashboard data locally:',
+                        storageError
+                    );
+                }
+
+                this.summary = data.summary;
+                this.recent = data.recent_transactions;
+
+                this.$nextTick(() => {
+                    this.renderCharts(data);
+                });
+
+            } catch (networkError) {
+                console.warn(
+                    'Unable to load dashboard data from network:',
+                    networkError
+                );
+
+                // Try the most recently saved dashboard snapshot.
+                try {
+                    const cached = await VKStorage.get(storageKey);
+
+                    if (!cached || !cached.data) {
+                        console.warn('No offline dashboard snapshot available.');
+                        return;
+                    }
+
+                    console.info(
+                        'Using offline dashboard snapshot saved at:',
+                        cached.savedAt
+                    );
+
+                    const data = cached.data;
+
                     this.summary = data.summary;
                     this.recent = data.recent_transactions;
-                    // this.$nextTick(() => this.renderCharts(data)); --> old
 
                     this.$nextTick(() => {
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => {
-                                this.renderCharts(data);
-                            });
-                        });
+                        this.renderCharts(data);
                     });
-                });
+
+                } catch (storageError) {
+                    console.error(
+                        'Unable to load offline dashboard data:',
+                        storageError
+                    );
+                }
+            }
         },
+
         renderCharts(data) {
             Object.values(this.charts).forEach(chart => {
                 try {
